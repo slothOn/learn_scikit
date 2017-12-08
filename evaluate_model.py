@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 # importing the dependencies
-from keras.models import load_model
 import numpy as np
 from sklearn import metrics
 import matplotlib.pyplot as plt
@@ -35,7 +34,7 @@ def plot_cm(cM, labels,title):
             color = 'black'
             if(predicted == real):
                 color = 'white'
-                print(labels[predicted].ljust(12)+ ':', cmNormalized[predicted,real], '%')
+                #print(labels[predicted].ljust(12)+ ':', cmNormalized[predicted,real], '%')
             plt.gca().annotate(
                     '{:d}'.format(int(cmNormalized[predicted,real])),xy=(real, predicted),
                     horizontalalignment = 'center',verticalalignment = 'center',color = color)
@@ -43,6 +42,8 @@ def plot_cm(cM, labels,title):
     plt.tight_layout()
     # saving the figure
     fig.savefig(title +'.png')
+
+'''
 # loading the pretrained model
 model = load_model('model.h5')
 #loading the testData and groundTruth data
@@ -51,10 +52,12 @@ groundTruth = np.load('groundTruth.npy')
 # evaluating the model
 score = model.evaluate(test_x,groundTruth,verbose=2)
 print('Baseline Error: %.2f%%' %(100-score[1]*100))
-
+'''
 
 '''
  Creating and plotting a confusion matrix
+
+'''
 
 '''
 # defining the class labels
@@ -71,6 +74,7 @@ for instance in range (groundTruth.shape[0]):
 cm = metrics.confusion_matrix(groundTruthClass,predictedClass)
 # plotting the confusion matrix
 plot_cm(cm, labels,'Normalized Confusion Matrix')
+'''
 
 
 

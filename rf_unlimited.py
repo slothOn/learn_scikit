@@ -2,6 +2,7 @@ __author__ = 'zxc'
 
 from sklearn.ensemble import RandomForestClassifier
 from util import *
+from sklearn.model_selection import cross_val_predict
 
 class rf_8_2:
     def __init__(self, dirpath = '/Users/zxc/Desktop/18697/team/users/'):
@@ -44,6 +45,8 @@ class rf_8_2:
         testScore = clf.score(X2, Y2)
         # 	testErrors.append(testScore)
         print("Test score: " + str(testScore))
+        pred_labels = cross_val_predict(clf, X, Y, cv=10)
+        my_confustion_matrix(true_label=Y, pred_label=pred_labels, matrix_name='Random Forest large dataset')
         # crossValScore = cross_val_score(clf, allFeatures, allLabels, cv=10)
         # crossVal.append(crossValScore.mean())
         # print("cross val score: " + str(crossValScore.mean()))
@@ -53,3 +56,5 @@ def test_unlimited_rf():
     #rf1.test()
     rf1 = rf_8_2('/Users/zxc/Desktop/18697/team/users_limited/')
     rf1.test()
+
+test_unlimited_rf()
